@@ -1,0 +1,23 @@
+body {
+    background: url('https://images8.alphacoders.com/966/966321.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: #fff;
+    font-family: 'DotGothic16', cursive;
+    text-align: center;
+    overflow: hidden;
+}
+
+.player {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    
+}
+
+.layout{
+    width: 2000px;
+    background-repeat: repeat;
+    background: url(https://opengameart.org/sites/default/files/grasspres_0.png);
+}
