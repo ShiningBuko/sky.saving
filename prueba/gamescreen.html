@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="gamestyle.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Honk&family=Monomakh&display=swap" rel="stylesheet">
+    <title>Salvando el cielo</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="main-screen__title">¡Recolecta las firmas!</h1>
+        <p>Puntos: <span id="score">0</span></p>
+        <canvas id="gameCanvas" width="1280" height="720"></canvas>
+    </div>
+    <div class="layout">
+        <div class="layout__item">
+            <img src="https://opengameart.org/sites/default/files/grasspres_0.png" alt="grass">          
+        </div>
+    
+        
+        
+    <script>
+     const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+    const scoreDisplay = document.getElementById("score");
+
+let player = { x: 225, y: 640, width: 100, height: 100, speed: 20 };
+let objects = [];
+let score = 0;
+// Cargar la imagen del jugador
+const playerImg = new Image();
+playerImg.src = "https://i.namu.wiki/i/vGrxqjsUo8yRPCFy7xYG4RkIG8MfzVyNwhAGiGjOE5IxJUBGBcQHnG2RepNflqmznR28DJezU96u4ZwirBHpgA.webp"; // Reemplaza con la URL de tu imagen
+
+// Cargar la imagen del meteorito
+const meteorImg = new Image();
+meteorImg.src = "https://media.istockphoto.com/id/165932344/es/vector/marca-de-verificaci%C3%B3n.jpg?s=612x612&w=0&k=20&c=1GNByUwtJ-TXEdBv6G0aiSvVcgYlrtKHKOsto4hxFHY="; // Reemplaza con la URL de tu imagen de meteorito
+
+function drawPlayer() {
+    if (playerImg.complete) {
+        ctx.drawImage(playerImg, player.x, player.y, player.width, player.height);
+    }
+}
+
+function drawObjects() {
+    objects.forEach(obj => {
+        if (meteorImg.complete) {
+            ctx.drawImage(meteorImg, obj.x, obj.y, obj.size, obj.size);
+        }
+    });
+}
+
+function updateObjects() {
+    objects.forEach((obj, index) => {
+        obj.y += obj.speed;
+        if (obj.y > canvas.height) objects.splice(index, 1); 
+        if (
+            obj.y + obj.size >= player.y &&
+            obj.x < player.x + player.width &&
+            obj.x + obj.size > player.x
+        ) {
+            objects.splice(index, 1);
+            score++;
+            scoreDisplay.textContent = score;
+        }
+    });
+}
+
+function spawnObject() {
+    objects.push({ x: Math.random() * (canvas.width - 30), y: 0, size: 30, speed: 3 });
+}
+
+function movePlayer(event) {
+    if (event.key === "a" && player.x > 0) player.x -= player.speed;
+    if (event.key === "d" && player.x < canvas.width - player.width) player.x += player.speed;
+}
+
+function gameLoop() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawPlayer();
+    drawObjects();
+    updateObjects();
+    requestAnimationFrame(gameLoop);
+}
+
+// Esperar a que ambas imágenes carguen antes de iniciar el juego
+let imagesLoaded = 0;
+function checkImagesLoaded() {
+    imagesLoaded++;
+    if (imagesLoaded === 2) { // Asegurar que ambas imágenes estén listas
+        gameLoop();
+        setInterval(spawnObject, 1000);
+    }
+}
+
+playerImg.onload = checkImagesLoaded;
+meteorImg.onload = checkImagesLoaded;
+
+document.addEventListener("keydown", movePlayer);
+
+    </script>
+</body>
+</html>
+

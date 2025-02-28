@@ -1,0 +1,55 @@
+body {
+    background: url('https://images8.alphacoders.com/966/966321.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: #fff;
+    font-family: 'DotGothic16', cursive;
+    text-align: center;
+    overflow: hidden;
+}
+
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.main-screen__title {
+    font-size: 2.5rem;
+    text-shadow: 0 0 5px rgb(128, 30, 106), 0 0 10px rgb(101, 20, 104), 0 0 15px rgb(88, 24, 94);
+    animation: title 2s ease-in-out infinite;
+}
+
+@keyframes title {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); } 
+    100% { transform: translateY(0); }
+}
+
+.main-screen__description {
+    font-size: 2rem;
+    text-shadow: 0 0 5px rgb(128, 30, 106), 0 0 10px rgb(101, 20, 104), 0 0 15px rgb(88, 24, 94);
+    position: relative;
+    top: -20px;
+}
+
+.main-screen__button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    color: black;
+    background: rgb(165, 111, 144);
+    border-radius: 2px;
+    text-decoration: none;
+    box-shadow: 0 0 10px rgb(151, 109, 137);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.main-screen__button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgb(255, 255, 255);
+}
