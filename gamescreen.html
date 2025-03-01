@@ -73,8 +73,8 @@ function spawnObject() {
 }
 
 function movePlayer(event) {
-    if (event.key === "a, A" && player.x > 0) player.x -= player.speed;
-    if (event.key === "d, D" && player.x < canvas.width - player.width) player.x += player.speed;
+    if (event.key === "a" && player.x > 0) player.x -= player.speed;
+    if (event.key === "d" && player.x < canvas.width - player.width) player.x += player.speed;
 }
 
 function gameLoop() {
